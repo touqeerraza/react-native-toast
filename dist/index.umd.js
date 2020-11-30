@@ -104,12 +104,12 @@
                 reactNative.Animated.sequence([
                     reactNative.Animated.timing(animatedValue, {
                         toValue: 1,
-                        duration: 200,
+                        duration: 600,
                         useNativeDriver: false,
                     }),
                     reactNative.Animated.timing(animatedValue, {
                         toValue: 0,
-                        duration: 300,
+                        duration: 600,
                         delay: state.delay,
                         useNativeDriver: false,
                     }),

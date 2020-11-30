@@ -91,12 +91,12 @@ var Toast = react_1.forwardRef(function (_props, ref) {
             react_native_1.Animated.sequence([
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 1,
-                    duration: 200,
+                    duration: 600,
                     useNativeDriver: false,
                 }),
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 0,
-                    duration: 300,
+                    duration: 600,
                     delay: state.delay,
                     useNativeDriver: false,
                 }),

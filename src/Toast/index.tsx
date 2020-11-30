@@ -78,12 +78,12 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
       Animated.sequence([
         Animated.timing(animatedValue, {
           toValue: 1,
-          duration: 200,
+          duration: 600,
           useNativeDriver: false,
         }),
         Animated.timing(animatedValue, {
           toValue: 0,
-          duration: 300,
+          duration: 600,
           delay: state.delay,
           useNativeDriver: false,
         }),
