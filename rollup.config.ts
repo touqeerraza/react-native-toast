@@ -1,4 +1,3 @@
-import * as react from 'react';
 import json from 'rollup-plugin-json';
 import camelCase from 'lodash.camelcase';
 import commonjs from 'rollup-plugin-commonjs';
@@ -33,11 +32,11 @@ export default {
     // Compile TypeScript files
     typescript({ useTsconfigDeclarationDir: true }),
     // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
-    commonjs({
-      namedExports: {
-        react: Object.keys(react),
-      },
-    }),
+    // commonjs({
+    //   namedExports: {
+    //     react: Object.keys(react),
+    //   },
+    // }),
     // Allow node_modules resolution, so you can use 'external' to control
     // which external modules to include in the bundle
     // https://github.com/rollup/rollup-plugin-node-resolve#usage

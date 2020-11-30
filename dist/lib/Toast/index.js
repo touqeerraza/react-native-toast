@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -31,24 +42,52 @@ var react_1 = __importStar(require("react"));
 // @ts-ignore
 var react_native_1 = require("react-native");
 var style_1 = __importDefault(require("./style"));
-var Toast = react_1.forwardRef(function (props, ref) {
-    var _a = react_1.useState(false), showToast = _a[0], setShowToast = _a[1];
-    var _b = react_1.useState(300), delay = _b[0], setDelay = _b[1];
-    // const [toastType, setToastType] = useState('');
-    var _c = react_1.useState(props.message), message = _c[0], setMessage = _c[1];
+var initialState = {
+    showToast: false,
+    delay: 1000,
+    message: 'Welcome to react-native-js-toast',
+    bottomSpace: 32,
+    topSpace: 32,
+    position: 'bottom',
+};
+var stateReducer = function (state, action) {
+    switch (action.type) {
+        case 'SHOW_TOAST':
+            return __assign(__assign({}, state), { showToast: action.payload });
+        case 'UPDATE_ALL':
+            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | state.delay, bottomSpace: action.payload.bottomSpace | state.bottomSpace, topSpace: action.payload.topSpace | state.topSpace, position: action.payload.position
+                    ? action.payload.position
+                    : state.position });
+        default:
+            return initialState;
+    }
+};
+var Toast = react_1.forwardRef(function (_props, ref) {
+    var _a = react_1.useReducer(stateReducer, initialState), state = _a[0], dispatch = _a[1];
     var animatedValue = react_1.useRef(new react_native_1.Animated.Value(0)).current;
     react_1.useImperativeHandle(ref, function () { return ({
-        show: function (msg, time) {
-            if (msg) {
-                setMessage(msg);
-                setDelay(time);
-                // setToastType(type);
+        show: function (_a) {
+            var message = _a.message, delay = _a.delay, bottomSpace = _a.bottomSpace, topSpace = _a.topSpace, position = _a.position;
+            if (message) {
+                dispatch({
+                    type: 'UPDATE_ALL',
+                    payload: {
+                        message: message,
+                        delay: delay,
+                        bottomSpace: bottomSpace,
+                        topSpace: topSpace,
+                        position: position,
+                    },
+                });
             }
-            setShowToast(true);
+            dispatch({
+                type: 'SHOW_TOAST',
+                payload: true,
+            });
         },
     }); });
     react_1.useEffect(function () {
-        if (showToast) {
+        if (state.showToast) {
             react_native_1.Animated.sequence([
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 1,
@@ -58,15 +97,26 @@ var Toast = react_1.forwardRef(function (props, ref) {
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 0,
                     duration: 300,
-                    delay: delay,
+                    delay: state.delay,
                     useNativeDriver: false,
                 }),
-            ]).start(function () { return setShowToast(false); });
+            ]).start(function () {
+                return dispatch({
+                    type: 'SHOW_TOAST',
+                    payload: false,
+                });
+            });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [showToast]);
-    return (react_1.default.createElement(react_native_1.Animated.View, { style: [style_1.default.toastWrapper, { opacity: animatedValue }] },
-        react_1.default.createElement(react_native_1.Text, { style: [style_1.default.toastMessage] }, message)));
+    }, [state.showToast]);
+    return (react_1.default.createElement(react_native_1.Animated.View, { style: [
+            style_1.default.toastWrapper,
+            { opacity: animatedValue },
+            state.position === 'bottom'
+                ? { bottom: state.bottomSpace }
+                : { top: state.topSpace },
+        ] },
+        react_1.default.createElement(react_native_1.Text, { style: [style_1.default.toastMessage] }, state.message)));
 });
 exports.default = react_1.default.memo(Toast);
 //# sourceMappingURL=index.js.map

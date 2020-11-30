@@ -20,3 +20,11 @@ export interface ToastProps {
     delay?: number;
     ref: any;
 }
+export interface IState {
+    showToast: boolean;
+    delay: number;
+    message: string;
+    bottomSpace: number;
+    topSpace: number;
+    position: 'bottom' | 'top' | string;
+}
