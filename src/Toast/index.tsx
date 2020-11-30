@@ -7,34 +7,74 @@ import React, {
   useEffect,
   useRef,
   forwardRef,
-  useState,
   useImperativeHandle,
+  useReducer,
 } from 'react';
 // @ts-ignore
 import { Animated, Text } from 'react-native';
 import style from './style';
-import { ToastProps } from '../types';
+import { ToastProps, IState } from '../types';
 
-const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
-  const [showToast, setShowToast] = useState(false);
-  const [delay, setDelay] = useState(300);
-  // const [toastType, setToastType] = useState('');
-  const [message, setMessage] = useState(props.message);
+const initialState = {
+  showToast: false,
+  delay: 1000,
+  message: 'Welcome to react-native-js-toast',
+  bottomSpace: 32,
+  topSpace: 32,
+  position: 'bottom',
+};
+
+const stateReducer = (state: IState, action: any): IState => {
+  switch (action.type) {
+    case 'SHOW_TOAST':
+      return {
+        ...state,
+        showToast: action.payload,
+      };
+    case 'UPDATE_ALL':
+      return {
+        ...state,
+        message: action.payload.message,
+        delay: action.payload.delay | state.delay,
+        bottomSpace: action.payload.bottomSpace | state.bottomSpace,
+        topSpace: action.payload.topSpace | state.topSpace,
+        position: action.payload.position
+          ? action.payload.position
+          : state.position,
+      };
+
+    default:
+      return initialState;
+  }
+};
+
+const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
+  const [state, dispatch] = useReducer(stateReducer, initialState);
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useImperativeHandle(ref, () => ({
-    show(msg: string, time: number) {
-      if (msg) {
-        setMessage(msg);
-        setDelay(time);
-        // setToastType(type);
+    show({ message, delay, bottomSpace, topSpace, position }: IState) {
+      if (message) {
+        dispatch({
+          type: 'UPDATE_ALL',
+          payload: {
+            message,
+            delay,
+            bottomSpace,
+            topSpace,
+            position,
+          },
+        });
       }
-      setShowToast(true);
+      dispatch({
+        type: 'SHOW_TOAST',
+        payload: true,
+      });
     },
   }));
 
   useEffect(() => {
-    if (showToast) {
+    if (state.showToast) {
       Animated.sequence([
         Animated.timing(animatedValue, {
           toValue: 1,
@@ -44,17 +84,30 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
         Animated.timing(animatedValue, {
           toValue: 0,
           duration: 300,
-          delay,
+          delay: state.delay,
           useNativeDriver: false,
         }),
-      ]).start(() => setShowToast(false));
+      ]).start(() =>
+        dispatch({
+          type: 'SHOW_TOAST',
+          payload: false,
+        }),
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showToast]);
+  }, [state.showToast]);
 
   return (
-    <Animated.View style={[style.toastWrapper, { opacity: animatedValue }]}>
-      <Text style={[style.toastMessage]}>{message}</Text>
+    <Animated.View
+      style={[
+        style.toastWrapper,
+        { opacity: animatedValue },
+        state.position === 'bottom'
+          ? { bottom: state.bottomSpace }
+          : { top: state.topSpace },
+      ]}
+    >
+      <Text style={[style.toastMessage]}>{state.message}</Text>
     </Animated.View>
   );
 });
