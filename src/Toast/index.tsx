@@ -13,7 +13,7 @@ import React, {
 // @ts-ignore
 import { Animated, Text } from 'react-native';
 import style from './style';
-import { ToastProps, IState } from '../types';
+import { ToastProps, IToastShow } from '../types';
 
 const initialState = {
   showToast: false,
@@ -24,7 +24,7 @@ const initialState = {
   position: 'bottom',
 };
 
-const stateReducer = (state: IState, action: any): IState => {
+const stateReducer = (state: IToastShow, action: any): IToastShow => {
   switch (action.type) {
     case 'SHOW_TOAST':
       return {
@@ -53,7 +53,7 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useImperativeHandle(ref, () => ({
-    show({ message, delay, bottomSpace, topSpace, position }: IState) {
+    show({ message, delay, bottomSpace, topSpace, position }: IToastShow) {
       if (message) {
         dispatch({
           type: 'UPDATE_ALL',
