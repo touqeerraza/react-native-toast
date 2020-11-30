@@ -11,7 +11,7 @@ npm install @asaeed14/react-native-toast
 OR
 
 ```
-yarn add asaeed14/react-native-toast
+yarn add @asaeed14/react-native-toast
 ```
 
 ## How to use

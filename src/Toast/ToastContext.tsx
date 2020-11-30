@@ -32,8 +32,6 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
   );
 };
 
-const ToastConsumer = ToastContext.Consumer;
-
 function useToastContext(): IToast {
   return useContext(ToastContext);
 }

@@ -46,7 +46,6 @@ var ToastProvider = function (props) {
         react_1.default.createElement(index_1.default, { ref: toastRef })));
 };
 exports.ToastProvider = ToastProvider;
-var ToastConsumer = ToastContext.Consumer;
 function useToastContext() {
     return react_1.useContext(ToastContext);
 }

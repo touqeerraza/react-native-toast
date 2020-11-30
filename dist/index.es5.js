@@ -148,7 +148,6 @@ var ToastProvider = function (props) {
         props.children,
         React.createElement(Toast$1, { ref: toastRef })));
 };
-var ToastConsumer = ToastContext.Consumer;
 function useToastContext() {
     return useContext(ToastContext);
 }
