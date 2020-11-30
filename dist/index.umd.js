@@ -137,7 +137,7 @@
     var ToastProvider = function (props) {
         var toastRef = React.useRef(null);
         var show = function (_a) {
-            var _b = _a.delay, delay = _b === void 0 ? 300 : _b, _c = _a.message, message = _c === void 0 ? '' : _c, _d = _a.type, type = _d === void 0 ? undefined : _d;
+            var _b = _a.delay, delay = _b === void 0 ? 300 : _b, _c = _a.message, message = _c === void 0 ? '' : _c;
             if (toastRef.current) {
                 // @ts-ignore
                 toastRef.current.show(message, delay, type);

@@ -7,11 +7,6 @@ declare global {
 export interface ToastContextProps {
     children?: any;
 }
-export interface IToastShow {
-    delay?: number;
-    message: string;
-    type?: 'success';
-}
 export interface IToast {
     show(arg: IToastShow): any;
 }
@@ -20,7 +15,7 @@ export interface ToastProps {
     delay?: number;
     ref: any;
 }
-export interface IState {
+export interface IToastShow {
     showToast: boolean;
     delay: number;
     message: string;
