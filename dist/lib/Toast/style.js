@@ -12,7 +12,7 @@ var style = react_native_1.StyleSheet.create({
         padding: 12,
         textAlign: 'center',
         zIndex: 100000000000,
-        backgroundColor: 'ffffff',
+        backgroundColor: '#ffffff',
         borderRadius: 4,
         justifyContent: 'space-between',
     },
