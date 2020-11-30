@@ -15,7 +15,13 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
   }: IToastShow) => {
     if (toastRef.current) {
       // @ts-ignore
-      toastRef.current.show(delay, message, position, bottomSpace, topSpace);
+      toastRef.current.show({
+        delay,
+        message,
+        position,
+        bottomSpace,
+        topSpace,
+      });
     }
   };
   return (

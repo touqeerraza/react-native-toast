@@ -135,7 +135,13 @@ var ToastProvider = function (props) {
         var delay = _a.delay, message = _a.message, position = _a.position, bottomSpace = _a.bottomSpace, topSpace = _a.topSpace;
         if (toastRef.current) {
             // @ts-ignore
-            toastRef.current.show(delay, message, position, bottomSpace, topSpace);
+            toastRef.current.show({
+                delay: delay,
+                message: message,
+                position: position,
+                bottomSpace: bottomSpace,
+                topSpace: topSpace,
+            });
         }
     };
     return (React.createElement(ToastContext.Provider, { value: { show: show } },
