@@ -20,10 +20,10 @@ export interface ToastProps {
 }
 
 export interface IToastShow {
-  showToast: boolean;
-  delay: number;
-  message: string;
-  bottomSpace: number;
-  topSpace: number;
-  position: 'bottom' | 'top' | string;
+  showToast?: boolean;
+  delay?: number;
+  message?: string;
+  bottomSpace?: number;
+  topSpace?: number;
+  position?: 'bottom' | 'top' | string;
 }

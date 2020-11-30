@@ -29,10 +29,10 @@ var ToastContext = react_1.default.createContext({});
 var ToastProvider = function (props) {
     var toastRef = react_1.useRef(null);
     var show = function (_a) {
-        var _b = _a.delay, delay = _b === void 0 ? 300 : _b, _c = _a.message, message = _c === void 0 ? '' : _c;
+        var delay = _a.delay, message = _a.message, position = _a.position, bottomSpace = _a.bottomSpace, topSpace = _a.topSpace;
         if (toastRef.current) {
             // @ts-ignore
-            toastRef.current.show(message, delay, type);
+            toastRef.current.show(delay, message, position, bottomSpace, topSpace);
         }
     };
     return (react_1.default.createElement(ToastContext.Provider, { value: { show: show } },

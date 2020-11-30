@@ -6,10 +6,16 @@ const ToastContext = React.createContext({} as IToast);
 
 const ToastProvider: React.FC<ToastContextProps> = (props) => {
   const toastRef = useRef(null);
-  const show = ({ delay = 300, message = '' }: IToastShow) => {
+  const show = ({
+    delay,
+    message,
+    position,
+    bottomSpace,
+    topSpace,
+  }: IToastShow) => {
     if (toastRef.current) {
       // @ts-ignore
-      toastRef.current.show(message, delay, type);
+      toastRef.current.show(delay, message, position, bottomSpace, topSpace);
     }
   };
   return (

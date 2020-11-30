@@ -55,7 +55,7 @@ var stateReducer = function (state, action) {
         case 'SHOW_TOAST':
             return __assign(__assign({}, state), { showToast: action.payload });
         case 'UPDATE_ALL':
-            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | state.delay, bottomSpace: action.payload.bottomSpace | state.bottomSpace, topSpace: action.payload.topSpace | state.topSpace, position: action.payload.position
+            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomSpace: action.payload.bottomSpace | initialState.bottomSpace, topSpace: action.payload.topSpace | initialState.topSpace, position: action.payload.position
                     ? action.payload.position
                     : state.position });
         default:

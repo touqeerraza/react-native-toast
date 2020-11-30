@@ -35,9 +35,9 @@ const stateReducer = (state: IToastShow, action: any): IToastShow => {
       return {
         ...state,
         message: action.payload.message,
-        delay: action.payload.delay | state.delay,
-        bottomSpace: action.payload.bottomSpace | state.bottomSpace,
-        topSpace: action.payload.topSpace | state.topSpace,
+        delay: action.payload.delay | initialState.delay,
+        bottomSpace: action.payload.bottomSpace | initialState.bottomSpace,
+        topSpace: action.payload.topSpace | initialState.topSpace,
         position: action.payload.position
           ? action.payload.position
           : state.position,
