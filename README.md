@@ -16,14 +16,14 @@ yarn add @asaeed14/react-native-toast
 
 ## Example
 
-![Toast](toast.gif)
+![Toast](https://github.com/asaeed14/react-native-toast/blob/main/toast.gif)
 
 ## How to Use
 
 Wrap your application parent with `ToastProvider`.
 
 ```ts
-import { ToastProvider } from 'react-native-js-toast';
+import { ToastProvider } from '@asaeed14/react-native-toast';
 
 const App = () => {
   return (
@@ -38,7 +38,7 @@ You can use `toast.show({})` from any of your component or screen.
 
 ```js
 // this is jsut an example you can call from anywhere based on your requirement.
-import { useToastContext } from 'react-native-js-toast';
+import { useToastContext } from '@asaeed14/react-native-toast';
 
 const LoginScreen = () => {
   const toast = useToastContext();
