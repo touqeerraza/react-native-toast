@@ -132,7 +132,13 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
       ]}
     >
       {state.type === 'success' ? (
-        <Image source={require('../success.png')} style={style.successImage} />
+        <Image
+          source={{
+            uri:
+              'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
+          }}
+          style={style.successImage}
+        />
       ) : null}
       <Text
         style={[

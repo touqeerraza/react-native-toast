@@ -146,7 +146,9 @@
                     ? { backgroundColor: state.backgroundColor }
                     : null,
             ] },
-            state.type === 'success' ? (React__default.createElement(reactNative.Image, { source: require('../success.png'), style: style.successImage })) : null,
+            state.type === 'success' ? (React__default.createElement(reactNative.Image, { source: {
+                    uri: 'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
+                }, style: style.successImage })) : null,
             React__default.createElement(reactNative.Text, { style: [
                     style.toastMessage,
                     state.textColor !== initialState.textColor

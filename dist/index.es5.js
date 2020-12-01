@@ -141,7 +141,9 @@ var Toast = forwardRef(function (_props, ref) {
                 ? { backgroundColor: state.backgroundColor }
                 : null,
         ] },
-        state.type === 'success' ? (React.createElement(Image, { source: require('../success.png'), style: style.successImage })) : null,
+        state.type === 'success' ? (React.createElement(Image, { source: {
+                uri: 'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
+            }, style: style.successImage })) : null,
         React.createElement(Text, { style: [
                 style.toastMessage,
                 state.textColor !== initialState.textColor
