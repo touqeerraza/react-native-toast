@@ -19,7 +19,9 @@ export interface IToastShow {
     showToast?: boolean;
     delay?: number;
     message?: string;
-    bottomSpace?: number;
-    topSpace?: number;
+    bottomOffset?: number;
+    topOffset?: number;
     position?: 'bottom' | 'top' | string;
+    backgroundColor?: string;
+    textColor?: string;
 }

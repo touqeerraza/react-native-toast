@@ -10,8 +10,10 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
     delay,
     message,
     position,
-    bottomSpace,
-    topSpace,
+    bottomOffset,
+    topOffset,
+    backgroundColor,
+    textColor,
   }: IToastShow) => {
     if (toastRef.current) {
       // @ts-ignore
@@ -19,8 +21,10 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
         delay,
         message,
         position,
-        bottomSpace,
-        topSpace,
+        bottomOffset,
+        topOffset,
+        backgroundColor,
+        textColor,
       });
     }
   };

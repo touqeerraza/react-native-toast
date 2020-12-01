@@ -58,17 +58,23 @@
     var initialState = {
         showToast: false,
         delay: 1000,
-        message: 'Welcome to react-native-js-toast',
-        bottomSpace: 32,
-        topSpace: 32,
+        message: 'Toast Message',
+        bottomOffset: 32,
+        topOffest: 32,
         position: 'bottom',
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        textColor: '#ffffff',
     };
     var stateReducer = function (state, action) {
         switch (action.type) {
             case 'SHOW_TOAST':
                 return __assign(__assign({}, state), { showToast: action.payload });
             case 'UPDATE_ALL':
-                return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomSpace: action.payload.bottomSpace | initialState.bottomSpace, topSpace: action.payload.topSpace | initialState.topSpace, position: action.payload.position
+                return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomOffset: action.payload.bottomOffset | initialState.bottomOffset, topOffset: action.payload.topSpace | initialState.topOffest, backgroundColor: action.payload.backgroundColor
+                        ? action.payload.backgroundColor
+                        : state.backgroundColor, textColor: action.payload.textColor
+                        ? action.payload.textColor
+                        : state.textColor, position: action.payload.position
                         ? action.payload.position
                         : state.position });
             default:
@@ -80,16 +86,18 @@
         var animatedValue = React.useRef(new reactNative.Animated.Value(0)).current;
         React.useImperativeHandle(ref, function () { return ({
             show: function (_a) {
-                var message = _a.message, delay = _a.delay, bottomSpace = _a.bottomSpace, topSpace = _a.topSpace, position = _a.position;
+                var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
                 if (message) {
                     dispatch({
                         type: 'UPDATE_ALL',
                         payload: {
                             message: message,
                             delay: delay,
-                            bottomSpace: bottomSpace,
-                            topSpace: topSpace,
+                            bottomOffset: bottomOffset,
+                            topOffset: topOffset,
                             position: position,
+                            backgroundColor: backgroundColor,
+                            textColor: textColor,
                         },
                     });
                 }
@@ -125,11 +133,18 @@
         return (React__default.createElement(reactNative.Animated.View, { style: [
                 style.toastWrapper,
                 { opacity: animatedValue },
-                state.position === 'bottom'
-                    ? { bottom: state.bottomSpace }
-                    : { top: state.topSpace },
+                state.position === 'bottom' ? { bottom: state.bottomOffset } : null,
+                state.position === 'top' ? { bottom: state.topOffset } : null,
+                state.backgroundColor !== initialState.backgroundColor
+                    ? { backgroundColor: state.backgroundColor }
+                    : null,
             ] },
-            React__default.createElement(reactNative.Text, { style: [style.toastMessage] }, state.message)));
+            React__default.createElement(reactNative.Text, { style: [
+                    style.toastMessage,
+                    state.textColor !== initialState.textColor
+                        ? { textColor: state.textColor }
+                        : null,
+                ] }, state.message)));
     });
     var Toast$1 = React__default.memo(Toast);
 
@@ -137,15 +152,17 @@
     var ToastProvider = function (props) {
         var toastRef = React.useRef(null);
         var show = function (_a) {
-            var delay = _a.delay, message = _a.message, position = _a.position, bottomSpace = _a.bottomSpace, topSpace = _a.topSpace;
+            var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
             if (toastRef.current) {
                 // @ts-ignore
                 toastRef.current.show({
                     delay: delay,
                     message: message,
                     position: position,
-                    bottomSpace: bottomSpace,
-                    topSpace: topSpace,
+                    bottomOffset: bottomOffset,
+                    topOffset: topOffset,
+                    backgroundColor: backgroundColor,
+                    textColor: textColor,
                 });
             }
         };

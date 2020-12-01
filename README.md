@@ -48,7 +48,7 @@ const LoginScreen = () => {
         message: 'Login Successfully',
         delay: 3000,
         position: 'bottom',
-        bottomSpace: 32,
+        bottomOffset: 32,
       });
     }
   }, [login]);
@@ -59,10 +59,12 @@ const LoginScreen = () => {
 
 ## Props
 
-| Name        | Type              | Required |            default             |               Description               |
-| ----------- | ----------------- | :------: | :----------------------------: | :-------------------------------------: |
-| message     | string            |  false   | "welome to react native toast" |           A message for toast           |
-| delay       | number            |  false   |              1000              |   number in miliseconds to show toast   |
-| position    | 'bottom' or 'top' |  false   |             bottom             |         position to show toast          |
-| bottomSpace | number            |  false   |               32               | space from bottom if position is bottom |
-| topSpace    | number            |  false   |               32               |    space from top if position is top    |
+| Name            | Type              | Required |            default             |               Description               |
+| --------------- | ----------------- | :------: | :----------------------------: | :-------------------------------------: |
+| message         | string            |  false   | "welome to react native toast" |           A message for toast           |
+| delay           | number            |  false   |              1000              |  Number in miliseconds to delay toast   |
+| position        | 'bottom' or 'top' |  false   |             bottom             |         Position to show toast          |
+| bottomOffset    | number            |  false   |               32               | Space from bottom if position is bottom |
+| topOffset       | number            |  false   |               32               |    Space from top if position is top    |
+| backgroundColor | string            |  false   |     'rgba(0, 0, 0, 0.75)'      |        Background color of toast        |
+| textColor       | string            |  false   |           '#ffffff'            |         Color of toast message          |

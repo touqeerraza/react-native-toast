@@ -18,10 +18,12 @@ import { ToastProps, IToastShow } from '../types';
 const initialState = {
   showToast: false,
   delay: 1000,
-  message: 'Welcome to react-native-js-toast',
-  bottomSpace: 32,
-  topSpace: 32,
+  message: 'Toast Message',
+  bottomOffset: 32,
+  topOffest: 32,
   position: 'bottom',
+  backgroundColor: 'rgba(0, 0, 0, 0.75)',
+  textColor: '#ffffff',
 };
 
 const stateReducer = (state: IToastShow, action: any): IToastShow => {
@@ -36,8 +38,14 @@ const stateReducer = (state: IToastShow, action: any): IToastShow => {
         ...state,
         message: action.payload.message,
         delay: action.payload.delay | initialState.delay,
-        bottomSpace: action.payload.bottomSpace | initialState.bottomSpace,
-        topSpace: action.payload.topSpace | initialState.topSpace,
+        bottomOffset: action.payload.bottomOffset | initialState.bottomOffset,
+        topOffset: action.payload.topSpace | initialState.topOffest,
+        backgroundColor: action.payload.backgroundColor
+          ? action.payload.backgroundColor
+          : state.backgroundColor,
+        textColor: action.payload.textColor
+          ? action.payload.textColor
+          : state.textColor,
         position: action.payload.position
           ? action.payload.position
           : state.position,
@@ -53,16 +61,26 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   useImperativeHandle(ref, () => ({
-    show({ message, delay, bottomSpace, topSpace, position }: IToastShow) {
+    show({
+      message,
+      delay,
+      bottomOffset,
+      topOffset,
+      position,
+      backgroundColor,
+      textColor,
+    }: IToastShow) {
       if (message) {
         dispatch({
           type: 'UPDATE_ALL',
           payload: {
             message,
             delay,
-            bottomSpace,
-            topSpace,
+            bottomOffset,
+            topOffset,
             position,
+            backgroundColor,
+            textColor,
           },
         });
       }
@@ -102,12 +120,23 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
       style={[
         style.toastWrapper,
         { opacity: animatedValue },
-        state.position === 'bottom'
-          ? { bottom: state.bottomSpace }
-          : { top: state.topSpace },
+        state.position === 'bottom' ? { bottom: state.bottomOffset } : null,
+        state.position === 'top' ? { bottom: state.topOffset } : null,
+        state.backgroundColor !== initialState.backgroundColor
+          ? { backgroundColor: state.backgroundColor }
+          : null,
       ]}
     >
-      <Text style={[style.toastMessage]}>{state.message}</Text>
+      <Text
+        style={[
+          style.toastMessage,
+          state.textColor !== initialState.textColor
+            ? { textColor: state.textColor }
+            : null,
+        ]}
+      >
+        {state.message}
+      </Text>
     </Animated.View>
   );
 });
