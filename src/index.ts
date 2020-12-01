@@ -1,3 +1,3 @@
 import { ToastProvider, useToastContext } from './Toast/ToastContext';
-
-export { ToastProvider, useToastContext };
+import { IToastShow } from './types';
+export { ToastProvider, useToastContext, IToastShow as ToastProps };
