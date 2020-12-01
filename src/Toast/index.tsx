@@ -131,7 +131,7 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
         style={[
           style.toastMessage,
           state.textColor !== initialState.textColor
-            ? { textColor: state.textColor }
+            ? { color: state.textColor }
             : null,
         ]}
       >

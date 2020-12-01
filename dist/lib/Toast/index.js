@@ -129,7 +129,7 @@ var Toast = react_1.forwardRef(function (_props, ref) {
         react_1.default.createElement(react_native_1.Text, { style: [
                 style_1.default.toastMessage,
                 state.textColor !== initialState.textColor
-                    ? { textColor: state.textColor }
+                    ? { color: state.textColor }
                     : null,
             ] }, state.message)));
 });
