@@ -43,14 +43,14 @@ const stateReducer = (state: IToastShow, action: any): IToastShow => {
         topOffset: action.payload.topSpace | initialState.topOffest,
         backgroundColor: action.payload.backgroundColor
           ? action.payload.backgroundColor
-          : state.backgroundColor,
+          : initialState.backgroundColor,
         textColor: action.payload.textColor
           ? action.payload.textColor
-          : state.textColor,
+          : initialState.textColor,
         position: action.payload.position
           ? action.payload.position
-          : state.position,
-        type: action.payload.type ? action.payload.type : state.type,
+          : initialState.position,
+        type: action.payload.type ? action.payload.type : initialState.type,
       };
 
     default:

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle, useReducer, useContext } from 'react';
-import { StyleSheet, Animated, Text, Image } from 'react-native';
+import { StyleSheet, Platform, Animated, Text, Image } from 'react-native';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -27,19 +27,22 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
-// @ts-ignore
 var style = StyleSheet.create({
-    toastWrapper: {
-        position: 'absolute',
-        flexDirection: 'row',
-        alignItems: 'center',
-        alignSelf: 'center',
-        padding: 12,
-        textAlign: 'center',
-        zIndex: 100000000000,
-        backgroundColor: 'rgba(0, 0, 0, 0.75)',
-        borderRadius: 6,
-    },
+    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, Platform.slect({
+        ios: {
+            shadowColor: '#000000',
+            shadowOpacity: 2 * 0.08,
+            shadowRadius: 8,
+            shadowOffset: {
+                width: 0,
+                height: 4,
+            },
+            overflow: 'visible',
+        },
+        android: {
+            elevation: 4,
+        },
+    })),
     toastMessage: {
         color: '#ffffff',
         fontWeight: '600',
@@ -49,8 +52,8 @@ var style = StyleSheet.create({
         height: 40,
     },
     successImage: {
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         marginRight: 8,
     },
 });
@@ -73,11 +76,11 @@ var stateReducer = function (state, action) {
         case 'UPDATE_ALL':
             return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomOffset: action.payload.bottomOffset | initialState.bottomOffset, topOffset: action.payload.topSpace | initialState.topOffest, backgroundColor: action.payload.backgroundColor
                     ? action.payload.backgroundColor
-                    : state.backgroundColor, textColor: action.payload.textColor
+                    : initialState.backgroundColor, textColor: action.payload.textColor
                     ? action.payload.textColor
-                    : state.textColor, position: action.payload.position
+                    : initialState.textColor, position: action.payload.position
                     ? action.payload.position
-                    : state.position, type: action.payload.type ? action.payload.type : state.type });
+                    : initialState.position, type: action.payload.type ? action.payload.type : initialState.type });
         default:
             return initialState;
     }

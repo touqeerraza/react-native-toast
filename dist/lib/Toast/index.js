@@ -60,11 +60,11 @@ var stateReducer = function (state, action) {
         case 'UPDATE_ALL':
             return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomOffset: action.payload.bottomOffset | initialState.bottomOffset, topOffset: action.payload.topSpace | initialState.topOffest, backgroundColor: action.payload.backgroundColor
                     ? action.payload.backgroundColor
-                    : state.backgroundColor, textColor: action.payload.textColor
+                    : initialState.backgroundColor, textColor: action.payload.textColor
                     ? action.payload.textColor
-                    : state.textColor, position: action.payload.position
+                    : initialState.textColor, position: action.payload.position
                     ? action.payload.position
-                    : state.position, type: action.payload.type ? action.payload.type : state.type });
+                    : initialState.position, type: action.payload.type ? action.payload.type : initialState.type });
         default:
             return initialState;
     }

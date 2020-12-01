@@ -12,6 +12,21 @@ const style = StyleSheet.create({
     zIndex: 100000000000,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     borderRadius: 6,
+    ...Platform.slect({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 2 * 0.08,
+        shadowRadius: 8,
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        overflow: 'visible',
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   toastMessage: {
     color: '#ffffff',
@@ -22,8 +37,8 @@ const style = StyleSheet.create({
     height: 40,
   },
   successImage: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
     marginRight: 8,
   },
 });
