@@ -12,7 +12,7 @@ const style = StyleSheet.create({
     zIndex: 100000000000,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     borderRadius: 6,
-    ...Platform.slect({
+    ...Platform.select({
       ios: {
         shadowColor: '#000000',
         shadowOpacity: 2 * 0.08,

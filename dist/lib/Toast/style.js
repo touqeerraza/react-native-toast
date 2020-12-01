@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-ignore
 var react_native_1 = require("react-native");
 var style = react_native_1.StyleSheet.create({
-    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, react_native_1.Platform.slect({
+    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, react_native_1.Platform.select({
         ios: {
             shadowColor: '#000000',
             shadowOpacity: 2 * 0.08,
