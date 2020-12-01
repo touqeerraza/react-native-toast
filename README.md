@@ -59,10 +59,10 @@ const LoginScreen = () => {
 
 ## Props
 
-| Name        | Type              | Required |           default            |               Description               |
-| ----------- | ----------------- | :------: | :--------------------------: | :-------------------------------------: |
-| message     | string            |  false   | welome to react native toast |           A message for toast           |
-| delay       | number            |  false   |             1000             |   number of milisecond to show toast    |
-| position    | 'bottom' or 'top' |  false   |            bottom            |         position to show toast          |
-| bottomSpace | number            |  false   |              32              | space from bottom if position is bottom |
-| topSpace    | number            |  false   |              32              |    space from top if position is top    |
+| Name        | Type              | Required |            default             |               Description               |
+| ----------- | ----------------- | :------: | :----------------------------: | :-------------------------------------: |
+| message     | string            |  false   | "welome to react native toast" |           A message for toast           |
+| delay       | number            |  false   |              1000              |   number in miliseconds to show toast   |
+| position    | 'bottom' or 'top' |  false   |             bottom             |         position to show toast          |
+| bottomSpace | number            |  false   |               32               | space from bottom if position is bottom |
+| topSpace    | number            |  false   |               32               |    space from top if position is top    |
