@@ -28,5 +28,5 @@ export interface IToastShow {
   position?: 'bottom' | 'top';
   backgroundColor?: string;
   textColor?: string;
-  type?: string;
+  type?: 'success';
 }
