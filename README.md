@@ -65,4 +65,4 @@ const LoginScreen = () => {
 | delay       | number            |  false   |             1000             |   number of milisecond to show toast    |
 | position    | 'bottom' or 'top' |  false   |            bottom            |         position to show toast          |
 | bottomSpace | number            |  false   |              32              | space from bottom if position is bottom |
-| topSpace    | number            |  false   |              32              |  space from bottom if position is top   |
+| topSpace    | number            |  false   |              32              |    space from top if position is top    |
