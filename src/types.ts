@@ -25,7 +25,7 @@ export interface IToastShow {
   message?: string;
   bottomOffset?: number;
   topOffset?: number;
-  position?: 'bottom' | 'top' | string;
+  position?: 'bottom' | 'top';
   backgroundColor?: string;
   textColor?: string;
   type?: string;

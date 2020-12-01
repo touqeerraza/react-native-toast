@@ -67,14 +67,18 @@ var initialState = {
     position: 'bottom',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     textColor: '#ffffff',
-    type: '',
+    type: undefined,
 };
 var stateReducer = function (state, action) {
     switch (action.type) {
         case 'SHOW_TOAST':
             return __assign(__assign({}, state), { showToast: action.payload });
         case 'UPDATE_ALL':
-            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay | initialState.delay, bottomOffset: action.payload.bottomOffset | initialState.bottomOffset, topOffset: action.payload.topSpace | initialState.topOffest, backgroundColor: action.payload.backgroundColor
+            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay ? action.payload.delay : initialState.delay, topOffset: action.payload.topOffset
+                    ? action.payload.topOffset
+                    : initialState.topOffset, bottomOffset: action.payload.bottomOffset
+                    ? action.payload.bottomOffset
+                    : initialState.bottomOffset, backgroundColor: action.payload.backgroundColor
                     ? action.payload.backgroundColor
                     : initialState.backgroundColor, textColor: action.payload.textColor
                     ? action.payload.textColor
