@@ -1,5 +1,5 @@
 {
-  "name": "react-native-toast",
+  "name": "@asaeed14/react-native-toast",
   "version": "0.0.1",
   "description": "React Native JS level toast for both android and ios",
   "keywords": [
@@ -17,10 +17,7 @@
   "files": [
     "dist"
   ],
-  "author": {
-    "name": "Ahmed Saeed",
-    "email": "ahmedsaeedtc@gmail.com"
-  },
+  "author": "Ahmed Saeed <ahmedsaeedtc@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/asaeed14/react-native-toast.git"
@@ -133,5 +130,11 @@
   "peerDependencies": {
     "react-native": ">=0.61.0",
     "react": ">= 16.8.0"
+  },
+  "bugs": {
+    "url": "https://github.com/asaeed14/react-native-toast/issues"
+  },
+  "directories": {
+    "test": "test"
   }
 }
