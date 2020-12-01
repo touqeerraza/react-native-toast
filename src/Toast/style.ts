@@ -21,6 +21,11 @@ const style = StyleSheet.create({
     width: 40,
     height: 40,
   },
+  successImage: {
+    width: 30,
+    height: 30,
+    marginRight: 8,
+  },
 });
 
 export default style;

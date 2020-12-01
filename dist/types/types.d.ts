@@ -24,4 +24,5 @@ export interface IToastShow {
     position?: 'bottom' | 'top' | string;
     backgroundColor?: string;
     textColor?: string;
+    type?: string;
 }

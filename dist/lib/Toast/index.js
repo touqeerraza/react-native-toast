@@ -51,6 +51,7 @@ var initialState = {
     position: 'bottom',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     textColor: '#ffffff',
+    type: '',
 };
 var stateReducer = function (state, action) {
     switch (action.type) {
@@ -63,7 +64,7 @@ var stateReducer = function (state, action) {
                     ? action.payload.textColor
                     : state.textColor, position: action.payload.position
                     ? action.payload.position
-                    : state.position });
+                    : state.position, type: action.payload.type ? action.payload.type : state.type });
         default:
             return initialState;
     }
@@ -73,7 +74,7 @@ var Toast = react_1.forwardRef(function (_props, ref) {
     var animatedValue = react_1.useRef(new react_native_1.Animated.Value(0)).current;
     react_1.useImperativeHandle(ref, function () { return ({
         show: function (_a) {
-            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
             if (message) {
                 dispatch({
                     type: 'UPDATE_ALL',
@@ -85,6 +86,7 @@ var Toast = react_1.forwardRef(function (_props, ref) {
                         position: position,
                         backgroundColor: backgroundColor,
                         textColor: textColor,
+                        type: type,
                     },
                 });
             }
@@ -126,6 +128,7 @@ var Toast = react_1.forwardRef(function (_props, ref) {
                 ? { backgroundColor: state.backgroundColor }
                 : null,
         ] },
+        state.type === 'success' ? (react_1.default.createElement(react_native_1.Image, { source: require('../success.png'), style: style_1.default.successImage })) : null,
         react_1.default.createElement(react_native_1.Text, { style: [
                 style_1.default.toastMessage,
                 state.textColor !== initialState.textColor

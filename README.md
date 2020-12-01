@@ -20,7 +20,7 @@ yarn add @asaeed14/react-native-toast
 
 ## How to Use
 
-Wrap your application parent with `ToastProvider`.
+Wrap your application entry point with `ToastProvider`.
 
 ```ts
 import { ToastProvider } from '@asaeed14/react-native-toast';
@@ -47,8 +47,11 @@ const LoginScreen = () => {
       toast.show({
         message: 'Login Successfully',
         delay: 3000,
-        position: 'bottom',
+        position: 'bottom' | 'top',
         bottomOffset: 32,
+        topOffest: 32,
+        backgroundColor: 'black' | 'rgba(0, 0, 0, 0.75)',
+        textColor: 'white' | 'black',
       });
     }
   }, [login]);
@@ -59,12 +62,13 @@ const LoginScreen = () => {
 
 ## Props
 
-| Name            | Type              | Required |            default             |               Description               |
-| --------------- | ----------------- | :------: | :----------------------------: | :-------------------------------------: |
-| message         | string            |  false   | "welome to react native toast" |           A message for toast           |
-| delay           | number            |  false   |              1000              |  Number in miliseconds to delay toast   |
-| position        | 'bottom' or 'top' |  false   |             bottom             |         Position to show toast          |
-| bottomOffset    | number            |  false   |               32               | Space from bottom if position is bottom |
-| topOffset       | number            |  false   |               32               |    Space from top if position is top    |
-| backgroundColor | string            |  false   |     'rgba(0, 0, 0, 0.75)'      |        Background color of toast        |
-| textColor       | string            |  false   |           '#ffffff'            |         Color of toast message          |
+| Name            | Type              | Required |            default             |                                    Description                                     |
+| --------------- | ----------------- | :------: | :----------------------------: | :--------------------------------------------------------------------------------: |
+| message         | string            |  false   | "welome to react native toast" |                                A message for toast                                 |
+| delay           | number            |  false   |              1000              |                        Number in miliseconds to delay toast                        |
+| position        | 'bottom' or 'top' |  false   |             bottom             |                               Position to show toast                               |
+| bottomOffset    | number            |  false   |               32               |                      Space from bottom if position is bottom                       |
+| topOffset       | number            |  false   |               32               |                         Space from top if position is top                          |
+| backgroundColor | string            |  false   |     'rgba(0, 0, 0, 0.75)'      |                             Background color of toast                              |
+| textColor       | string            |  false   |           '#ffffff'            |                               Color of toast message                               |
+| type            | string            |  false   |               ''               | Right now just "success" type supported. Icon will be shown on the left of message |

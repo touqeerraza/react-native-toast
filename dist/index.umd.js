@@ -53,6 +53,11 @@
             width: 40,
             height: 40,
         },
+        successImage: {
+            width: 30,
+            height: 30,
+            marginRight: 8,
+        },
     });
 
     var initialState = {
@@ -64,6 +69,7 @@
         position: 'bottom',
         backgroundColor: 'rgba(0, 0, 0, 0.75)',
         textColor: '#ffffff',
+        type: '',
     };
     var stateReducer = function (state, action) {
         switch (action.type) {
@@ -76,7 +82,7 @@
                         ? action.payload.textColor
                         : state.textColor, position: action.payload.position
                         ? action.payload.position
-                        : state.position });
+                        : state.position, type: action.payload.type ? action.payload.type : state.type });
             default:
                 return initialState;
         }
@@ -86,7 +92,7 @@
         var animatedValue = React.useRef(new reactNative.Animated.Value(0)).current;
         React.useImperativeHandle(ref, function () { return ({
             show: function (_a) {
-                var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+                var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
                 if (message) {
                     dispatch({
                         type: 'UPDATE_ALL',
@@ -98,6 +104,7 @@
                             position: position,
                             backgroundColor: backgroundColor,
                             textColor: textColor,
+                            type: type,
                         },
                     });
                 }
@@ -139,6 +146,7 @@
                     ? { backgroundColor: state.backgroundColor }
                     : null,
             ] },
+            state.type === 'success' ? (React__default.createElement(reactNative.Image, { source: require('../success.png'), style: style.successImage })) : null,
             React__default.createElement(reactNative.Text, { style: [
                     style.toastMessage,
                     state.textColor !== initialState.textColor
@@ -152,7 +160,7 @@
     var ToastProvider = function (props) {
         var toastRef = React.useRef(null);
         var show = function (_a) {
-            var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+            var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
             if (toastRef.current) {
                 // @ts-ignore
                 toastRef.current.show({
@@ -163,6 +171,7 @@
                     topOffset: topOffset,
                     backgroundColor: backgroundColor,
                     textColor: textColor,
+                    type: type,
                 });
             }
         };

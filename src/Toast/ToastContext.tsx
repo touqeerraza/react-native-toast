@@ -14,6 +14,7 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
     topOffset,
     backgroundColor,
     textColor,
+    type,
   }: IToastShow) => {
     if (toastRef.current) {
       // @ts-ignore
@@ -25,6 +26,7 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
         topOffset,
         backgroundColor,
         textColor,
+        type,
       });
     }
   };

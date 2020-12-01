@@ -22,6 +22,11 @@ var style = react_native_1.StyleSheet.create({
         width: 40,
         height: 40,
     },
+    successImage: {
+        width: 30,
+        height: 30,
+        marginRight: 8,
+    },
 });
 exports.default = style;
 //# sourceMappingURL=style.js.map

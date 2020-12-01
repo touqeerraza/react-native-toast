@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle, useReducer, useContext } from 'react';
-import { StyleSheet, Animated, Text } from 'react-native';
+import { StyleSheet, Animated, Text, Image } from 'react-native';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -48,6 +48,11 @@ var style = StyleSheet.create({
         width: 40,
         height: 40,
     },
+    successImage: {
+        width: 30,
+        height: 30,
+        marginRight: 8,
+    },
 });
 
 var initialState = {
@@ -59,6 +64,7 @@ var initialState = {
     position: 'bottom',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     textColor: '#ffffff',
+    type: '',
 };
 var stateReducer = function (state, action) {
     switch (action.type) {
@@ -71,7 +77,7 @@ var stateReducer = function (state, action) {
                     ? action.payload.textColor
                     : state.textColor, position: action.payload.position
                     ? action.payload.position
-                    : state.position });
+                    : state.position, type: action.payload.type ? action.payload.type : state.type });
         default:
             return initialState;
     }
@@ -81,7 +87,7 @@ var Toast = forwardRef(function (_props, ref) {
     var animatedValue = useRef(new Animated.Value(0)).current;
     useImperativeHandle(ref, function () { return ({
         show: function (_a) {
-            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
             if (message) {
                 dispatch({
                     type: 'UPDATE_ALL',
@@ -93,6 +99,7 @@ var Toast = forwardRef(function (_props, ref) {
                         position: position,
                         backgroundColor: backgroundColor,
                         textColor: textColor,
+                        type: type,
                     },
                 });
             }
@@ -134,6 +141,7 @@ var Toast = forwardRef(function (_props, ref) {
                 ? { backgroundColor: state.backgroundColor }
                 : null,
         ] },
+        state.type === 'success' ? (React.createElement(Image, { source: require('../success.png'), style: style.successImage })) : null,
         React.createElement(Text, { style: [
                 style.toastMessage,
                 state.textColor !== initialState.textColor
@@ -147,7 +155,7 @@ var ToastContext = React.createContext({});
 var ToastProvider = function (props) {
     var toastRef = useRef(null);
     var show = function (_a) {
-        var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+        var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
         if (toastRef.current) {
             // @ts-ignore
             toastRef.current.show({
@@ -158,6 +166,7 @@ var ToastProvider = function (props) {
                 topOffset: topOffset,
                 backgroundColor: backgroundColor,
                 textColor: textColor,
+                type: type,
             });
         }
     };

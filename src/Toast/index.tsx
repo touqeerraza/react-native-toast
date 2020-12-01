@@ -11,7 +11,7 @@ import React, {
   useReducer,
 } from 'react';
 // @ts-ignore
-import { Animated, Text } from 'react-native';
+import { Animated, Text, Image } from 'react-native';
 import style from './style';
 import { ToastProps, IToastShow } from '../types';
 
@@ -24,6 +24,7 @@ const initialState = {
   position: 'bottom',
   backgroundColor: 'rgba(0, 0, 0, 0.75)',
   textColor: '#ffffff',
+  type: '',
 };
 
 const stateReducer = (state: IToastShow, action: any): IToastShow => {
@@ -49,6 +50,7 @@ const stateReducer = (state: IToastShow, action: any): IToastShow => {
         position: action.payload.position
           ? action.payload.position
           : state.position,
+        type: action.payload.type ? action.payload.type : state.type,
       };
 
     default:
@@ -69,6 +71,7 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
       position,
       backgroundColor,
       textColor,
+      type,
     }: IToastShow) {
       if (message) {
         dispatch({
@@ -81,6 +84,7 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
             position,
             backgroundColor,
             textColor,
+            type,
           },
         });
       }
@@ -127,6 +131,9 @@ const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
           : null,
       ]}
     >
+      {state.type === 'success' ? (
+        <Image source={require('../success.png')} style={style.successImage} />
+      ) : null}
       <Text
         style={[
           style.toastMessage,

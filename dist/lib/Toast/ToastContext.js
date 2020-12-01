@@ -29,7 +29,7 @@ var ToastContext = react_1.default.createContext({});
 var ToastProvider = function (props) {
     var toastRef = react_1.useRef(null);
     var show = function (_a) {
-        var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor;
+        var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
         if (toastRef.current) {
             // @ts-ignore
             toastRef.current.show({
@@ -40,6 +40,7 @@ var ToastProvider = function (props) {
                 topOffset: topOffset,
                 backgroundColor: backgroundColor,
                 textColor: textColor,
+                type: type,
             });
         }
     };
