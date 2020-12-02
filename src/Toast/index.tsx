@@ -9,58 +9,12 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useReducer,
+  useCallback,
 } from 'react';
 // @ts-ignore
 import { Animated, Text, Image } from 'react-native';
 import style from './style';
 import { ToastProps, IToastShow } from '../types';
-
-const initialState = {
-  showToast: false,
-  delay: 1000,
-  message: 'Toast Message',
-  bottomOffset: 32,
-  topOffest: 32,
-  position: 'bottom',
-  backgroundColor: 'rgba(0, 0, 0, 0.75)',
-  textColor: '#ffffff',
-  type: undefined,
-} as IToastShow;
-
-const stateReducer = (state: IToastShow, action: any): IToastShow => {
-  switch (action.type) {
-    case 'SHOW_TOAST':
-      return {
-        ...state,
-        showToast: action.payload,
-      };
-    case 'UPDATE_ALL':
-      return {
-        ...state,
-        message: action.payload.message,
-        delay: action.payload.delay ? action.payload.delay : initialState.delay,
-        topOffset: action.payload.topOffset
-          ? action.payload.topOffset
-          : initialState.topOffset,
-        bottomOffset: action.payload.bottomOffset
-          ? action.payload.bottomOffset
-          : initialState.bottomOffset,
-        backgroundColor: action.payload.backgroundColor
-          ? action.payload.backgroundColor
-          : initialState.backgroundColor,
-        textColor: action.payload.textColor
-          ? action.payload.textColor
-          : initialState.textColor,
-        position: action.payload.position
-          ? action.payload.position
-          : initialState.position,
-        type: action.payload.type ? action.payload.type : initialState.type,
-      };
-
-    default:
-      return initialState;
-  }
-};
 
 const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
   const initialState = {
@@ -75,6 +29,47 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
     textColor: props.defaultTheme?.textColor || '#ffffff',
     type: props.defaultTheme?.type || undefined,
   } as IToastShow;
+
+  const stateReducer = useCallback(
+    (state: IToastShow, action: any): IToastShow => {
+      switch (action.type) {
+        case 'SHOW_TOAST':
+          return {
+            ...state,
+            showToast: action.payload,
+          };
+        case 'UPDATE_ALL':
+          return {
+            ...state,
+            message: action.payload.message,
+            delay: action.payload.delay
+              ? action.payload.delay
+              : initialState.delay,
+            topOffset: action.payload.topOffset
+              ? action.payload.topOffset
+              : initialState.topOffset,
+            bottomOffset: action.payload.bottomOffset
+              ? action.payload.bottomOffset
+              : initialState.bottomOffset,
+            backgroundColor: action.payload.backgroundColor
+              ? action.payload.backgroundColor
+              : initialState.backgroundColor,
+            textColor: action.payload.textColor
+              ? action.payload.textColor
+              : initialState.textColor,
+            position: action.payload.position
+              ? action.payload.position
+              : initialState.position,
+            type: action.payload.type ? action.payload.type : initialState.type,
+          };
+
+        default:
+          return initialState;
+      }
+    },
+    [initialState],
+  );
+
   const [state, dispatch] = useReducer(stateReducer, initialState);
   const animatedValue = useRef(new Animated.Value(0)).current;
 

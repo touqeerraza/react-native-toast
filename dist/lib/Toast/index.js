@@ -42,37 +42,6 @@ var react_1 = __importStar(require("react"));
 // @ts-ignore
 var react_native_1 = require("react-native");
 var style_1 = __importDefault(require("./style"));
-var initialState = {
-    showToast: false,
-    delay: 1000,
-    message: 'Toast Message',
-    bottomOffset: 32,
-    topOffest: 32,
-    position: 'bottom',
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    textColor: '#ffffff',
-    type: undefined,
-};
-var stateReducer = function (state, action) {
-    switch (action.type) {
-        case 'SHOW_TOAST':
-            return __assign(__assign({}, state), { showToast: action.payload });
-        case 'UPDATE_ALL':
-            return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay ? action.payload.delay : initialState.delay, topOffset: action.payload.topOffset
-                    ? action.payload.topOffset
-                    : initialState.topOffset, bottomOffset: action.payload.bottomOffset
-                    ? action.payload.bottomOffset
-                    : initialState.bottomOffset, backgroundColor: action.payload.backgroundColor
-                    ? action.payload.backgroundColor
-                    : initialState.backgroundColor, textColor: action.payload.textColor
-                    ? action.payload.textColor
-                    : initialState.textColor, position: action.payload.position
-                    ? action.payload.position
-                    : initialState.position, type: action.payload.type ? action.payload.type : initialState.type });
-        default:
-            return initialState;
-    }
-};
 var Toast = react_1.forwardRef(function (props, ref) {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     var initialState = {
@@ -86,6 +55,28 @@ var Toast = react_1.forwardRef(function (props, ref) {
         textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
         type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
     };
+    var stateReducer = react_1.useCallback(function (state, action) {
+        switch (action.type) {
+            case 'SHOW_TOAST':
+                return __assign(__assign({}, state), { showToast: action.payload });
+            case 'UPDATE_ALL':
+                return __assign(__assign({}, state), { message: action.payload.message, delay: action.payload.delay
+                        ? action.payload.delay
+                        : initialState.delay, topOffset: action.payload.topOffset
+                        ? action.payload.topOffset
+                        : initialState.topOffset, bottomOffset: action.payload.bottomOffset
+                        ? action.payload.bottomOffset
+                        : initialState.bottomOffset, backgroundColor: action.payload.backgroundColor
+                        ? action.payload.backgroundColor
+                        : initialState.backgroundColor, textColor: action.payload.textColor
+                        ? action.payload.textColor
+                        : initialState.textColor, position: action.payload.position
+                        ? action.payload.position
+                        : initialState.position, type: action.payload.type ? action.payload.type : initialState.type });
+            default:
+                return initialState;
+        }
+    }, [initialState]);
     var _j = react_1.useReducer(stateReducer, initialState), state = _j[0], dispatch = _j[1];
     var animatedValue = react_1.useRef(new react_native_1.Animated.Value(0)).current;
     react_1.useImperativeHandle(ref, function () { return ({
