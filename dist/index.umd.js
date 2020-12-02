@@ -94,8 +94,20 @@
                 return initialState;
         }
     };
-    var Toast = React.forwardRef(function (_props, ref) {
-        var _a = React.useReducer(stateReducer, initialState), state = _a[0], dispatch = _a[1];
+    var Toast = React.forwardRef(function (props, ref) {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var initialState = {
+            showToast: false,
+            delay: ((_a = props.defaultTheme) === null || _a === void 0 ? void 0 : _a.delay) || 1000,
+            message: ((_b = props.defaultTheme) === null || _b === void 0 ? void 0 : _b.message) || 'This is toast message',
+            bottomOffset: ((_c = props.defaultTheme) === null || _c === void 0 ? void 0 : _c.bottomOffset) || 32,
+            topOffest: ((_d = props.defaultTheme) === null || _d === void 0 ? void 0 : _d.topOffset) || 32,
+            position: ((_e = props.defaultTheme) === null || _e === void 0 ? void 0 : _e.position) || 'bottom',
+            backgroundColor: ((_f = props.defaultTheme) === null || _f === void 0 ? void 0 : _f.backgroundColor) || 'rgba(0, 0, 0, 0.75)',
+            textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
+            type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
+        };
+        var _j = React.useReducer(stateReducer, initialState), state = _j[0], dispatch = _j[1];
         var animatedValue = React.useRef(new reactNative.Animated.Value(0)).current;
         React.useImperativeHandle(ref, function () { return ({
             show: function (_a) {
@@ -186,7 +198,7 @@
         };
         return (React__default.createElement(ToastContext.Provider, { value: { show: show } },
             props.children,
-            React__default.createElement(Toast$1, { ref: toastRef })));
+            React__default.createElement(Toast$1, { ref: toastRef, defaultTheme: props.defaultTheme })));
     };
     function useToastContext() {
         return React.useContext(ToastContext);

@@ -46,7 +46,7 @@ var ToastProvider = function (props) {
     };
     return (react_1.default.createElement(ToastContext.Provider, { value: { show: show } },
         props.children,
-        react_1.default.createElement(index_1.default, { ref: toastRef })));
+        react_1.default.createElement(index_1.default, { ref: toastRef, defaultTheme: props.defaultTheme })));
 };
 exports.ToastProvider = ToastProvider;
 function useToastContext() {

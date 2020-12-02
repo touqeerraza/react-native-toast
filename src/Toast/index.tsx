@@ -62,7 +62,19 @@ const stateReducer = (state: IToastShow, action: any): IToastShow => {
   }
 };
 
-const Toast: React.FC<ToastProps> = forwardRef((_props, ref) => {
+const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
+  const initialState = {
+    showToast: false,
+    delay: props.defaultTheme?.delay || 1000,
+    message: props.defaultTheme?.message || 'This is toast message',
+    bottomOffset: props.defaultTheme?.bottomOffset || 32,
+    topOffest: props.defaultTheme?.topOffset || 32,
+    position: props.defaultTheme?.position || 'bottom',
+    backgroundColor:
+      props.defaultTheme?.backgroundColor || 'rgba(0, 0, 0, 0.75)',
+    textColor: props.defaultTheme?.textColor || '#ffffff',
+    type: props.defaultTheme?.type || undefined,
+  } as IToastShow;
   const [state, dispatch] = useReducer(stateReducer, initialState);
   const animatedValue = useRef(new Animated.Value(0)).current;
 

@@ -6,14 +6,14 @@ declare global {
 }
 export interface ToastContextProps {
     children?: any;
+    defaultTheme?: IToastShow;
 }
 export interface IToast {
     show(arg: IToastShow): any;
 }
 export interface ToastProps {
-    message?: any;
-    delay?: number;
     ref: any;
+    defaultTheme?: IToastShow;
 }
 export interface IToastShow {
     showToast?: boolean;

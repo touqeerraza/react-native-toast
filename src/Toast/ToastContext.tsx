@@ -33,7 +33,7 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
   return (
     <ToastContext.Provider value={{ show }}>
       {props.children}
-      <Toast ref={toastRef} />
+      <Toast ref={toastRef} defaultTheme={props.defaultTheme} />
     </ToastContext.Provider>
   );
 };

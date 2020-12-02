@@ -7,6 +7,7 @@ declare global {
 
 export interface ToastContextProps {
   children?: any;
+  defaultTheme?: IToastShow;
 }
 
 export interface IToast {
@@ -14,9 +15,8 @@ export interface IToast {
 }
 
 export interface ToastProps {
-  message?: any;
-  delay?: number;
   ref: any;
+  defaultTheme?: IToastShow;
 }
 
 export interface IToastShow {

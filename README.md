@@ -27,7 +27,18 @@ import { ToastProvider } from '@asaeed14/react-native-toast';
 
 const App = () => {
   return (
-    <ToastProvider>
+    <ToastProvider
+      defaultTheme={{
+        message: 'Hello Toast',
+        delay: 1000,
+        position: 'bottom' | 'top',
+        bottomOffset: 20,
+        topOffest: 20,
+        backgroundColor: 'black' | 'rgba(0, 0, 0, 0.75)',
+        textColor: 'white' | 'black',
+        type: 'success',
+      }}
+    >
       <App />
     </ToastProvider>
   );
@@ -52,6 +63,7 @@ const LoginScreen = () => {
         topOffest: 32,
         backgroundColor: 'black' | 'rgba(0, 0, 0, 0.75)',
         textColor: 'white' | 'black',
+        type: 'success',
       });
     }
   }, [login]);
@@ -60,15 +72,21 @@ const LoginScreen = () => {
 };
 ```
 
+## ToastProvider Props
+
+| Name         | Type   | Required |    default    |                                                               Description                                                                |
+| ------------ | ------ | :------: | :-----------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
+| defaultTheme | object |  false   | default Props | You can provide default theme to make toast consistent to all over the app, default theme props can be replaced by "show" function props |
+
 ## Props
 
-| Name            | Type              | Required |            default             |                                    Description                                     |
-| --------------- | ----------------- | :------: | :----------------------------: | :--------------------------------------------------------------------------------: |
-| message         | string            |  false   | "welome to react native toast" |                                A message for toast                                 |
-| delay           | number            |  false   |              1000              |                        Number in miliseconds to delay toast                        |
-| position        | 'bottom' or 'top' |  false   |             bottom             |                               Position to show toast                               |
-| bottomOffset    | number            |  false   |               32               |                      Space from bottom if position is bottom                       |
-| topOffset       | number            |  false   |               32               |                         Space from top if position is top                          |
-| backgroundColor | string            |  false   |     'rgba(0, 0, 0, 0.75)'      |                             Background color of toast                              |
-| textColor       | string            |  false   |           '#ffffff'            |                               Color of toast message                               |
-| type            | string            |  false   |               ''               | Right now just "success" type supported. Icon will be shown on the left of message |
+| Name            | Type              | Required |         default         |                                    Description                                     |
+| --------------- | ----------------- | :------: | :---------------------: | :--------------------------------------------------------------------------------: |
+| message         | string            |  false   | "This is toast message" |                                A message for toast                                 |
+| delay           | number            |  false   |          1000           |                        Number in miliseconds to delay toast                        |
+| position        | 'bottom' or 'top' |  false   |         bottom          |                               Position to show toast                               |
+| bottomOffset    | number            |  false   |           32            |                      Space from bottom if position is bottom                       |
+| topOffset       | number            |  false   |           32            |                         Space from top if position is top                          |
+| backgroundColor | string            |  false   |  'rgba(0, 0, 0, 0.75)'  |                             Background color of toast                              |
+| textColor       | string            |  false   |        '#ffffff'        |                               Color of toast message                               |
+| type            | string            |  false   |           ''            | Right now just "success" type supported. Icon will be shown on the left of message |
