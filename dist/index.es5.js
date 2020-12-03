@@ -28,7 +28,7 @@ var __assign = function() {
 };
 
 var style = StyleSheet.create({
-    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', bottom: 0, zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, Platform.select({
+    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, Platform.select({
         ios: {
             shadowColor: '#000000',
             shadowOpacity: 3 * 0.08,

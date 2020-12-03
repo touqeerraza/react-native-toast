@@ -9,7 +9,6 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     padding: 12,
     textAlign: 'center',
-    bottom: 0,
     zIndex: 100000000000,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     borderRadius: 6,
