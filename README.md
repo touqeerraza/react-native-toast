@@ -45,7 +45,7 @@ const App = () => {
 };
 ```
 
-You can use `toast.show({})` from any of your component or screen.
+You can use `toast.show()` from any of your component or screen.
 
 ```js
 // this is jsut an example you can call from anywhere based on your requirement.
@@ -80,13 +80,13 @@ const LoginScreen = () => {
 
 ## Props
 
-| Name            | Type              | Required |         default         |                                    Description                                     |
-| --------------- | ----------------- | :------: | :---------------------: | :--------------------------------------------------------------------------------: |
-| message         | string            |  false   | "This is toast message" |                                A message for toast                                 |
-| delay           | number            |  false   |          1000           |                        Number in miliseconds to delay toast                        |
-| position        | 'bottom' or 'top' |  false   |         bottom          |                               Position to show toast                               |
-| bottomOffset    | number            |  false   |           32            |                      Space from bottom if position is bottom                       |
-| topOffset       | number            |  false   |           32            |                         Space from top if position is top                          |
-| backgroundColor | string            |  false   |  'rgba(0, 0, 0, 0.75)'  |                             Background color of toast                              |
-| textColor       | string            |  false   |        '#ffffff'        |                               Color of toast message                               |
-| type            | string            |  false   |           ''            | Right now just "success" type supported. Icon will be shown on the left of message |
+| Name            | Type              | Required |        default        |                                    Description                                     |
+| --------------- | ----------------- | :------: | :-------------------: | :--------------------------------------------------------------------------------: |
+| message         | string            |  false   |     "Hello Toast"     |                                A message for toast                                 |
+| delay           | number            |  false   |         1000          |                        Number in miliseconds to delay toast                        |
+| position        | 'bottom' or 'top' |  false   |        bottom         |                               Position to show toast                               |
+| bottomOffset    | number            |  false   |          32           |                      Space from bottom if position is bottom                       |
+| topOffset       | number            |  false   |          32           |                         Space from top if position is top                          |
+| backgroundColor | string            |  false   | 'rgba(0, 0, 0, 0.75)' |                             Background color of toast                              |
+| textColor       | string            |  false   |       '#ffffff'       |                               Color of toast message                               |
+| type            | string            |  false   |          ''           | Right now just "success" type supported. Icon will be shown on the left of message |
