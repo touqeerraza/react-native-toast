@@ -16,7 +16,8 @@ yarn add @asaeed14/react-native-toast
 
 ## Example
 
-![Toast](https://github.com/asaeed14/react-native-toast/blob/main/toast.gif)
+![Top Example](https://github.com/asaeed14/react-native-toast/blob/main/top.gif)
+![Bottom Example](https://github.com/asaeed14/react-native-toast/blob/main/bottom.gif)
 
 ## How to Use
 
@@ -33,7 +34,7 @@ const App = () => {
         delay: 1000,
         position: 'bottom' | 'top',
         bottomOffset: 20,
-        topOffest: 20,
+        topOffset: 20,
         backgroundColor: 'black' | 'rgba(0, 0, 0, 0.75)',
         textColor: 'white' | 'black',
         type: 'success',
