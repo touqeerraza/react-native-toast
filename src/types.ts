@@ -11,7 +11,7 @@ export interface ToastContextProps {
 }
 
 export interface IToast {
-  show(arg: IToastShow): any;
+  show(arg?: IToastShow): any;
 }
 
 export interface ToastProps {

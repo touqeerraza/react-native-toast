@@ -9,7 +9,7 @@ export interface ToastContextProps {
     defaultTheme?: IToastShow;
 }
 export interface IToast {
-    show(arg: IToastShow): any;
+    show(arg?: IToastShow): any;
 }
 export interface ToastProps {
     ref: any;
