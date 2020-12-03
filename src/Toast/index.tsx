@@ -25,7 +25,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
         delay: props.defaultTheme?.delay || 1000,
         message: props.defaultTheme?.message || 'This is toast message',
         bottomOffset: props.defaultTheme?.bottomOffset || 32,
-        topOffest: props.defaultTheme?.topOffset || 32,
+        topOffset: props.defaultTheme?.topOffset || 32,
         position: props.defaultTheme?.position || 'bottom',
         backgroundColor:
           props.defaultTheme?.backgroundColor || 'rgba(0, 0, 0, 0.75)',
