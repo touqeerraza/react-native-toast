@@ -146,6 +146,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
         { opacity: animatedValue },
         state.position === 'bottom'
           ? {
+              bottom: 0,
               transform: [
                 {
                   translateY: animatedValue.interpolate({

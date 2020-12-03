@@ -136,6 +136,7 @@ var Toast = react_1.forwardRef(function (props, ref) {
             { opacity: animatedValue },
             state.position === 'bottom'
                 ? {
+                    bottom: 0,
                     transform: [
                         {
                             translateY: animatedValue.interpolate({
