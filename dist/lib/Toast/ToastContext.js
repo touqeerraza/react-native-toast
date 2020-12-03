@@ -29,7 +29,7 @@ var ToastContext = react_1.default.createContext({});
 var ToastProvider = function (props) {
     var toastRef = react_1.useRef(null);
     var show = function (_a) {
-        var delay = _a.delay, message = _a.message, position = _a.position, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
+        var _b = _a === void 0 ? {} : _a, delay = _b.delay, message = _b.message, position = _b.position, bottomOffset = _b.bottomOffset, topOffset = _b.topOffset, backgroundColor = _b.backgroundColor, textColor = _b.textColor, type = _b.type;
         if (toastRef.current) {
             // @ts-ignore
             toastRef.current.show({

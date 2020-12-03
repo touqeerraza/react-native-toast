@@ -15,7 +15,7 @@ const ToastProvider: React.FC<ToastContextProps> = (props) => {
     backgroundColor,
     textColor,
     type,
-  }: IToastShow) => {
+  }: IToastShow = {}) => {
     if (toastRef.current) {
       // @ts-ignore
       toastRef.current.show({
