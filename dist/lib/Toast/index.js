@@ -43,18 +43,20 @@ var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var style_1 = __importDefault(require("./style"));
 var Toast = react_1.forwardRef(function (props, ref) {
-    var _a, _b, _c, _d, _e, _f, _g, _h;
-    var initialState = {
-        showToast: false,
-        delay: ((_a = props.defaultTheme) === null || _a === void 0 ? void 0 : _a.delay) || 1000,
-        message: ((_b = props.defaultTheme) === null || _b === void 0 ? void 0 : _b.message) || 'This is toast message',
-        bottomOffset: ((_c = props.defaultTheme) === null || _c === void 0 ? void 0 : _c.bottomOffset) || 32,
-        topOffest: ((_d = props.defaultTheme) === null || _d === void 0 ? void 0 : _d.topOffset) || 32,
-        position: ((_e = props.defaultTheme) === null || _e === void 0 ? void 0 : _e.position) || 'bottom',
-        backgroundColor: ((_f = props.defaultTheme) === null || _f === void 0 ? void 0 : _f.backgroundColor) || 'rgba(0, 0, 0, 0.75)',
-        textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
-        type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
-    };
+    var initialState = react_1.useMemo(function () {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        return ({
+            showToast: false,
+            delay: ((_a = props.defaultTheme) === null || _a === void 0 ? void 0 : _a.delay) || 1000,
+            message: ((_b = props.defaultTheme) === null || _b === void 0 ? void 0 : _b.message) || 'This is toast message',
+            bottomOffset: ((_c = props.defaultTheme) === null || _c === void 0 ? void 0 : _c.bottomOffset) || 32,
+            topOffest: ((_d = props.defaultTheme) === null || _d === void 0 ? void 0 : _d.topOffset) || 32,
+            position: ((_e = props.defaultTheme) === null || _e === void 0 ? void 0 : _e.position) || 'bottom',
+            backgroundColor: ((_f = props.defaultTheme) === null || _f === void 0 ? void 0 : _f.backgroundColor) || 'rgba(0, 0, 0, 0.75)',
+            textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
+            type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
+        });
+    }, [props.defaultTheme]);
     var stateReducer = react_1.useCallback(function (state, action) {
         switch (action.type) {
             case 'SHOW_TOAST':
@@ -77,7 +79,7 @@ var Toast = react_1.forwardRef(function (props, ref) {
                 return initialState;
         }
     }, [initialState]);
-    var _j = react_1.useReducer(stateReducer, initialState), state = _j[0], dispatch = _j[1];
+    var _a = react_1.useReducer(stateReducer, initialState), state = _a[0], dispatch = _a[1];
     var animatedValue = react_1.useRef(new react_native_1.Animated.Value(0)).current;
     react_1.useImperativeHandle(ref, function () { return ({
         show: function (_a) {
@@ -109,13 +111,13 @@ var Toast = react_1.forwardRef(function (props, ref) {
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 1,
                     duration: 600,
-                    useNativeDriver: false,
+                    useNativeDriver: true,
                 }),
                 react_native_1.Animated.timing(animatedValue, {
                     toValue: 0,
                     duration: 600,
                     delay: state.delay,
-                    useNativeDriver: false,
+                    useNativeDriver: true,
                 }),
             ]).start(function () {
                 return dispatch({
@@ -126,24 +128,45 @@ var Toast = react_1.forwardRef(function (props, ref) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.showToast]);
+    if (!state.showToast) {
+        return null;
+    }
     return (react_1.default.createElement(react_native_1.Animated.View, { style: [
             style_1.default.toastWrapper,
             { opacity: animatedValue },
-            state.position === 'bottom' ? { bottom: state.bottomOffset } : null,
-            state.position === 'top' ? { bottom: state.topOffset } : null,
-            state.backgroundColor !== initialState.backgroundColor
-                ? { backgroundColor: state.backgroundColor }
+            state.position === 'bottom'
+                ? {
+                    transform: [
+                        {
+                            translateY: animatedValue.interpolate({
+                                inputRange: [0, 1],
+                                // @ts-ignore
+                                outputRange: [0, -state.bottomOffset],
+                            }),
+                        },
+                    ],
+                }
                 : null,
+            // state.position === 'top' ? { bottom: state.topOffset } : null,
+            state.position === 'top'
+                ? {
+                    transform: [
+                        {
+                            translateY: animatedValue.interpolate({
+                                inputRange: [0, 1],
+                                // @ts-ignore
+                                outputRange: [0, state.topOffset],
+                            }),
+                        },
+                    ],
+                }
+                : null,
+            { backgroundColor: state.backgroundColor },
         ] },
         state.type === 'success' ? (react_1.default.createElement(react_native_1.Image, { source: {
                 uri: 'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
             }, style: style_1.default.successImage })) : null,
-        react_1.default.createElement(react_native_1.Text, { style: [
-                style_1.default.toastMessage,
-                state.textColor !== initialState.textColor
-                    ? { color: state.textColor }
-                    : null,
-            ] }, state.message)));
+        react_1.default.createElement(react_native_1.Text, { style: [style_1.default.toastMessage, { color: state.textColor }] }, state.message)));
 });
 exports.default = react_1.default.memo(Toast);
 //# sourceMappingURL=index.js.map

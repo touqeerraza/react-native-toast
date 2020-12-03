@@ -10,6 +10,7 @@ import React, {
   useImperativeHandle,
   useReducer,
   useCallback,
+  useMemo,
 } from 'react';
 // @ts-ignore
 import { Animated, Text, Image } from 'react-native';
@@ -17,18 +18,22 @@ import style from './style';
 import { ToastProps, IToastShow } from '../types';
 
 const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
-  const initialState = {
-    showToast: false,
-    delay: props.defaultTheme?.delay || 1000,
-    message: props.defaultTheme?.message || 'This is toast message',
-    bottomOffset: props.defaultTheme?.bottomOffset || 32,
-    topOffest: props.defaultTheme?.topOffset || 32,
-    position: props.defaultTheme?.position || 'bottom',
-    backgroundColor:
-      props.defaultTheme?.backgroundColor || 'rgba(0, 0, 0, 0.75)',
-    textColor: props.defaultTheme?.textColor || '#ffffff',
-    type: props.defaultTheme?.type || undefined,
-  } as IToastShow;
+  const initialState = useMemo(
+    () =>
+      ({
+        showToast: false,
+        delay: props.defaultTheme?.delay || 1000,
+        message: props.defaultTheme?.message || 'This is toast message',
+        bottomOffset: props.defaultTheme?.bottomOffset || 32,
+        topOffest: props.defaultTheme?.topOffset || 32,
+        position: props.defaultTheme?.position || 'bottom',
+        backgroundColor:
+          props.defaultTheme?.backgroundColor || 'rgba(0, 0, 0, 0.75)',
+        textColor: props.defaultTheme?.textColor || '#ffffff',
+        type: props.defaultTheme?.type || undefined,
+      } as IToastShow),
+    [props.defaultTheme],
+  );
 
   const stateReducer = useCallback(
     (state: IToastShow, action: any): IToastShow => {
@@ -112,13 +117,13 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
         Animated.timing(animatedValue, {
           toValue: 1,
           duration: 600,
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
         Animated.timing(animatedValue, {
           toValue: 0,
           duration: 600,
           delay: state.delay,
-          useNativeDriver: false,
+          useNativeDriver: true,
         }),
       ]).start(() =>
         dispatch({
@@ -130,16 +135,43 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.showToast]);
 
+  if (!state.showToast) {
+    return null;
+  }
+
   return (
     <Animated.View
       style={[
         style.toastWrapper,
         { opacity: animatedValue },
-        state.position === 'bottom' ? { bottom: state.bottomOffset } : null,
-        state.position === 'top' ? { bottom: state.topOffset } : null,
-        state.backgroundColor !== initialState.backgroundColor
-          ? { backgroundColor: state.backgroundColor }
+        state.position === 'bottom'
+          ? {
+              transform: [
+                {
+                  translateY: animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    // @ts-ignore
+                    outputRange: [0, -state.bottomOffset],
+                  }),
+                },
+              ],
+            }
           : null,
+        // state.position === 'top' ? { bottom: state.topOffset } : null,
+        state.position === 'top'
+          ? {
+              transform: [
+                {
+                  translateY: animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    // @ts-ignore
+                    outputRange: [0, state.topOffset],
+                  }),
+                },
+              ],
+            }
+          : null,
+        { backgroundColor: state.backgroundColor },
       ]}
     >
       {state.type === 'success' ? (
@@ -151,14 +183,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
           style={style.successImage}
         />
       ) : null}
-      <Text
-        style={[
-          style.toastMessage,
-          state.textColor !== initialState.textColor
-            ? { color: state.textColor }
-            : null,
-        ]}
-      >
+      <Text style={[style.toastMessage, { color: state.textColor }]}>
         {state.message}
       </Text>
     </Animated.View>

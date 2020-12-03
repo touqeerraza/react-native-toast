@@ -9,22 +9,23 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     padding: 12,
     textAlign: 'center',
+    bottom: 0,
     zIndex: 100000000000,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     borderRadius: 6,
     ...Platform.select({
       ios: {
         shadowColor: '#000000',
-        shadowOpacity: 2 * 0.08,
-        shadowRadius: 8,
+        shadowOpacity: 3 * 0.08,
+        shadowRadius: 12,
         shadowOffset: {
           width: 0,
-          height: 4,
+          height: 6,
         },
         overflow: 'visible',
       },
       android: {
-        elevation: 4,
+        elevation: 2,
       },
     }),
   },

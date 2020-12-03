@@ -14,19 +14,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-ignore
 var react_native_1 = require("react-native");
 var style = react_native_1.StyleSheet.create({
-    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, react_native_1.Platform.select({
+    toastWrapper: __assign({ position: 'absolute', flexDirection: 'row', alignItems: 'center', alignSelf: 'center', padding: 12, textAlign: 'center', bottom: 0, zIndex: 100000000000, backgroundColor: 'rgba(0, 0, 0, 0.75)', borderRadius: 6 }, react_native_1.Platform.select({
         ios: {
             shadowColor: '#000000',
-            shadowOpacity: 2 * 0.08,
-            shadowRadius: 8,
+            shadowOpacity: 3 * 0.08,
+            shadowRadius: 12,
             shadowOffset: {
                 width: 0,
-                height: 4,
+                height: 6,
             },
             overflow: 'visible',
         },
         android: {
-            elevation: 4,
+            elevation: 2,
         },
     })),
     toastMessage: {
