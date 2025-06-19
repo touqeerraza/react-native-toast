@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, forwardRef, useImperativeHandle, useReducer, useCallback, useMemo, useContext } from 'react';
-import { StyleSheet, Platform, Animated, Text, Image } from 'react-native';
+import { StyleSheet, Platform, Animated, Text, Image, View } from 'react-native';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -60,7 +60,7 @@ var style = StyleSheet.create({
 
 var Toast = forwardRef(function (props, ref) {
     var initialState = useMemo(function () {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         return ({
             showToast: false,
             delay: ((_a = props.defaultTheme) === null || _a === void 0 ? void 0 : _a.delay) || 1000,
@@ -71,6 +71,7 @@ var Toast = forwardRef(function (props, ref) {
             backgroundColor: ((_f = props.defaultTheme) === null || _f === void 0 ? void 0 : _f.backgroundColor) || 'rgba(0, 0, 0, 0.75)',
             textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
             type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
+            icon: ((_j = props.defaultTheme) === null || _j === void 0 ? void 0 : _j.icon) || undefined,
         });
     }, [props.defaultTheme]);
     var stateReducer = useCallback(function (state, action) {
@@ -99,7 +100,7 @@ var Toast = forwardRef(function (props, ref) {
     var animatedValue = useRef(new Animated.Value(0)).current;
     useImperativeHandle(ref, function () { return ({
         show: function (_a) {
-            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
+            var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type, icon = _a.icon;
             if (message) {
                 dispatch({
                     type: 'UPDATE_ALL',
@@ -112,6 +113,7 @@ var Toast = forwardRef(function (props, ref) {
                         backgroundColor: backgroundColor,
                         textColor: textColor,
                         type: type,
+                        icon: icon,
                     },
                 });
             }
@@ -180,7 +182,7 @@ var Toast = forwardRef(function (props, ref) {
                 : null,
             { backgroundColor: state.backgroundColor },
         ] },
-        state.type === 'success' ? (React.createElement(Image, { source: {
+        state.icon ? (React.createElement(View, { style: { marginRight: 8 } }, state.icon)) : state.type === 'success' ? (React.createElement(Image, { source: {
                 uri: 'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
             }, style: style.successImage })) : null,
         React.createElement(Text, { style: [style.toastMessage, { color: state.textColor }] }, state.message)));
@@ -191,7 +193,7 @@ var ToastContext = React.createContext({});
 var ToastProvider = function (props) {
     var toastRef = useRef(null);
     var show = function (_a) {
-        var _b = _a === void 0 ? {} : _a, delay = _b.delay, message = _b.message, position = _b.position, bottomOffset = _b.bottomOffset, topOffset = _b.topOffset, backgroundColor = _b.backgroundColor, textColor = _b.textColor, type = _b.type;
+        var _b = _a === void 0 ? {} : _a, delay = _b.delay, message = _b.message, position = _b.position, bottomOffset = _b.bottomOffset, topOffset = _b.topOffset, backgroundColor = _b.backgroundColor, textColor = _b.textColor, type = _b.type, icon = _b.icon;
         if (toastRef.current) {
             // @ts-ignore
             toastRef.current.show({
@@ -203,6 +205,7 @@ var ToastProvider = function (props) {
                 backgroundColor: backgroundColor,
                 textColor: textColor,
                 type: type,
+                icon: icon,
             });
         }
     };

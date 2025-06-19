@@ -13,7 +13,7 @@ import React, {
   useMemo,
 } from 'react';
 // @ts-ignore
-import { Animated, Text, Image } from 'react-native';
+import { Animated, Text, Image, View } from 'react-native';
 import style from './style';
 import { ToastProps, IToastShow } from '../types';
 
@@ -179,7 +179,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
       ]}
     >
       {state.icon ? (
-        state.icon
+        <View style={{ marginRight: 8 }}>{state.icon}</View>
       ) : state.type === 'success' ? (
         <Image
           source={{

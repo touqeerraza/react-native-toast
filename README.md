@@ -5,13 +5,13 @@ React Native JS level toast for both android and IOS which can be called from an
 ## Install
 
 ```
-npm install @asaeed14/react-native-toast
+npm install @touqeerraza/react-native-toast
 ```
 
 OR
 
 ```
-yarn add @asaeed14/react-native-toast
+yarn add @touqeerraza/react-native-toast
 ```
 
 ## Example
@@ -24,7 +24,7 @@ yarn add @asaeed14/react-native-toast
 Wrap your application entry point with `ToastProvider`.
 
 ```ts
-import { ToastProvider } from '@asaeed14/react-native-toast';
+import { ToastProvider } from '@touqeerraza/react-native-toast';
 
 const App = () => {
   return (
@@ -50,7 +50,8 @@ You can use `toast.show()` from any of your component or screen.
 
 ```js
 // this is jsut an example you can call from anywhere based on your requirement.
-import { useToastContext } from '@asaeed14/react-native-toast';
+import { useToastContext } from '@touqeerraza/react-native-toast';
+import { MaterialIcons } from 'react-native-vector-icons';
 
 const LoginScreen = () => {
   const toast = useToastContext();
@@ -59,12 +60,8 @@ const LoginScreen = () => {
       toast.show({
         message: 'Login Successfully',
         delay: 3000,
-        position: 'bottom' | 'top',
-        bottomOffset: 32,
-        topOffest: 32,
-        backgroundColor: 'black' | 'rgba(0, 0, 0, 0.75)',
-        textColor: 'white' | 'black',
-        type: 'success',
+        icon: <MaterialIcons name="check-circle" size={24} color="green" />,
+        position: 'bottom',
       });
     }
   }, [login]);
@@ -91,3 +88,4 @@ const LoginScreen = () => {
 | backgroundColor | string            |  false   | 'rgba(0, 0, 0, 0.75)' |                             Background color of toast                              |
 | textColor       | string            |  false   |       '#ffffff'       |                               Color of toast message                               |
 | type            | string            |  false   |          ''           | Right now just "success" type supported. Icon will be shown on the left of message |
+| icon            | ReactNode         |  false   |          -            | Custom React component to display as an icon to the left of the message            |

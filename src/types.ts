@@ -1,4 +1,4 @@
-import { JSX, ReactNode } from 'react';
+import React from 'react';
 
 export interface ToastContextProps {
   children?: any;
@@ -24,5 +24,8 @@ export interface IToastShow {
   backgroundColor?: string;
   textColor?: string;
   type?: 'success';
-  icon?: JSX.Element | ReactNode;
+  /**
+   * Custom icon component to display to the left of the message.
+   */
+  icon?: React.ReactNode;
 }

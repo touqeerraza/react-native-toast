@@ -65,7 +65,7 @@
 
     var Toast = React.forwardRef(function (props, ref) {
         var initialState = React.useMemo(function () {
-            var _a, _b, _c, _d, _e, _f, _g, _h;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j;
             return ({
                 showToast: false,
                 delay: ((_a = props.defaultTheme) === null || _a === void 0 ? void 0 : _a.delay) || 1000,
@@ -76,6 +76,7 @@
                 backgroundColor: ((_f = props.defaultTheme) === null || _f === void 0 ? void 0 : _f.backgroundColor) || 'rgba(0, 0, 0, 0.75)',
                 textColor: ((_g = props.defaultTheme) === null || _g === void 0 ? void 0 : _g.textColor) || '#ffffff',
                 type: ((_h = props.defaultTheme) === null || _h === void 0 ? void 0 : _h.type) || undefined,
+                icon: ((_j = props.defaultTheme) === null || _j === void 0 ? void 0 : _j.icon) || undefined,
             });
         }, [props.defaultTheme]);
         var stateReducer = React.useCallback(function (state, action) {
@@ -104,7 +105,7 @@
         var animatedValue = React.useRef(new reactNative.Animated.Value(0)).current;
         React.useImperativeHandle(ref, function () { return ({
             show: function (_a) {
-                var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type;
+                var message = _a.message, delay = _a.delay, bottomOffset = _a.bottomOffset, topOffset = _a.topOffset, position = _a.position, backgroundColor = _a.backgroundColor, textColor = _a.textColor, type = _a.type, icon = _a.icon;
                 if (message) {
                     dispatch({
                         type: 'UPDATE_ALL',
@@ -117,6 +118,7 @@
                             backgroundColor: backgroundColor,
                             textColor: textColor,
                             type: type,
+                            icon: icon,
                         },
                     });
                 }
@@ -185,7 +187,7 @@
                     : null,
                 { backgroundColor: state.backgroundColor },
             ] },
-            state.type === 'success' ? (React__default.createElement(reactNative.Image, { source: {
+            state.icon ? (React__default.createElement(reactNative.View, { style: { marginRight: 8 } }, state.icon)) : state.type === 'success' ? (React__default.createElement(reactNative.Image, { source: {
                     uri: 'https://raw.githubusercontent.com/asaeed14/react-native-toast/main/src/success.png',
                 }, style: style.successImage })) : null,
             React__default.createElement(reactNative.Text, { style: [style.toastMessage, { color: state.textColor }] }, state.message)));
@@ -196,7 +198,7 @@
     var ToastProvider = function (props) {
         var toastRef = React.useRef(null);
         var show = function (_a) {
-            var _b = _a === void 0 ? {} : _a, delay = _b.delay, message = _b.message, position = _b.position, bottomOffset = _b.bottomOffset, topOffset = _b.topOffset, backgroundColor = _b.backgroundColor, textColor = _b.textColor, type = _b.type;
+            var _b = _a === void 0 ? {} : _a, delay = _b.delay, message = _b.message, position = _b.position, bottomOffset = _b.bottomOffset, topOffset = _b.topOffset, backgroundColor = _b.backgroundColor, textColor = _b.textColor, type = _b.type, icon = _b.icon;
             if (toastRef.current) {
                 // @ts-ignore
                 toastRef.current.show({
@@ -208,6 +210,7 @@
                     backgroundColor: backgroundColor,
                     textColor: textColor,
                     type: type,
+                    icon: icon,
                 });
             }
         };

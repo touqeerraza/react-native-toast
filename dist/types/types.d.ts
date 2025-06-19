@@ -1,9 +1,4 @@
-declare global {
-    interface Window {
-        google: any;
-        [key: string]: any;
-    }
-}
+import React from 'react';
 export interface ToastContextProps {
     children?: any;
     defaultTheme?: IToastShow;
@@ -25,4 +20,8 @@ export interface IToastShow {
     backgroundColor?: string;
     textColor?: string;
     type?: 'success';
+    /**
+     * Custom icon component to display to the left of the message.
+     */
+    icon?: React.ReactNode;
 }
