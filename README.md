@@ -5,13 +5,13 @@ React Native JS level toast for both android and IOS which can be called from an
 ## Install
 
 ```
-npm install react-native-toast-context
+npm install @touqeer_raza/react-native-toast
 ```
 
 OR
 
 ```
-yarn add react-native-toast-context
+yarn add @touqeer_raza/react-native-toast
 ```
 
 ## Example
@@ -24,7 +24,7 @@ yarn add react-native-toast-context
 Wrap your application entry point with `ToastProvider`.
 
 ```ts
-import { ToastProvider } from 'react-native-toast-context';
+import { ToastProvider } from '@touqeer_raza/react-native-toast';
 
 const App = () => {
   return (
@@ -50,7 +50,7 @@ You can use `toast.show()` from any of your component or screen.
 
 ```js
 // this is jsut an example you can call from anywhere based on your requirement.
-import { useToastContext } from 'react-native-toast-context';
+import { useToastContext } from '@touqeer_raza/react-native-toast';
 import { MaterialIcons } from 'react-native-vector-icons';
 
 const LoginScreen = () => {
