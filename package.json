@@ -1,5 +1,5 @@
 {
-  "name": "@touqeerraza/react-native-toast",
+  "name": "react-native-toast-context",
   "version": "0.0.1",
   "description": "React Native JS level toast for both android and ios",
   "keywords": [
