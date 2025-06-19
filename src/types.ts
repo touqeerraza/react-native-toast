@@ -1,9 +1,4 @@
-declare global {
-  interface Window {
-    google: any;
-    [key: string]: any;
-  }
-}
+import { JSX, ReactNode } from 'react';
 
 export interface ToastContextProps {
   children?: any;
@@ -29,4 +24,5 @@ export interface IToastShow {
   backgroundColor?: string;
   textColor?: string;
   type?: 'success';
+  icon?: JSX.Element | ReactNode;
 }

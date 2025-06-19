@@ -31,6 +31,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
           props.defaultTheme?.backgroundColor || 'rgba(0, 0, 0, 0.75)',
         textColor: props.defaultTheme?.textColor || '#ffffff',
         type: props.defaultTheme?.type || undefined,
+        icon: props.defaultTheme?.icon || undefined,
       } as IToastShow),
     [props.defaultTheme],
   );
@@ -88,6 +89,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
       backgroundColor,
       textColor,
       type,
+      icon,
     }: IToastShow) {
       if (message) {
         dispatch({
@@ -101,6 +103,7 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
             backgroundColor,
             textColor,
             type,
+            icon,
           },
         });
       }
@@ -175,7 +178,9 @@ const Toast: React.FC<ToastProps> = forwardRef((props, ref) => {
         { backgroundColor: state.backgroundColor },
       ]}
     >
-      {state.type === 'success' ? (
+      {state.icon ? (
+        state.icon
+      ) : state.type === 'success' ? (
         <Image
           source={{
             uri:
